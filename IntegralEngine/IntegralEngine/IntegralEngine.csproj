@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IE_MsgBus.cs" />
-    <Compile Include="IE_System.cs" />
-    <Compile Include="IE_Window.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="MsgBus.cs" />
+    <Compile Include="IMsgObserver.cs" />
+    <Compile Include="System.cs" />
+    <Compile Include="Window.cs" />
     <Compile Include="IntegralEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

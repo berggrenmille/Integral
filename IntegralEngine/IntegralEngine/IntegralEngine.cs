@@ -1,15 +1,19 @@
 ﻿using System;
+using OpenTK.Input;
 
 namespace IntegralEngine
 {
     public class IntegralEngine
     {
-        public IE_System[] systems = new IE_System[5];
+        public IESystem[] systems = new IESystem[5];
         public IntegralEngine()
         {
-            IE_MsgBus msgBus = new IE_MsgBus();
-            IE_Window window = new IE_Window();
-            window.msgBus = msgBus;
+   
+            Window window = new Window();
+
+            MsgBus.Subscribe(window);
+            
+   
             
             window.Run(0);
         }

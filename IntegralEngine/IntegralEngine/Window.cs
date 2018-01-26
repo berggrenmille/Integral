@@ -2,14 +2,13 @@
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
-using OpenTK.Input;
+using Console = System.Console;
 
 namespace IntegralEngine
 {
-    public sealed class IE_Window : GameWindow
+    public sealed class Window : GameWindow, IMsgObserver
     {
-        public IE_System msgBus;
-        public IE_Window()
+        public Window()
             : base(1280, // width
                 720, // height
                 GraphicsMode.Default,
@@ -35,17 +34,16 @@ namespace IntegralEngine
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-
+            Input.UpdateInput();
+            MsgBus.SendMessage(new Msg(null,MsgEvent.UPDATE));
         }
-        protected override void OnRenderFrame(FrameEventArgs e)
+        protected override void OnRenderFrame(FrameEventArgs e)     
         {
+            MsgBus.SendMessage(new Msg(null,MsgEvent.DELAYED_UPDATE));
+            MsgBus.SendMessage(new Msg(null,MsgEvent.RENDER));
             Title = $"(Vsync: {VSync}) FPS: {1f / e.Time:0}";
 
-            Color4 backColor;
-            backColor.A = 1.0f;
-            backColor.R = 0.1f;
-            backColor.G = 0.1f;
-            backColor.B = 0.3f;
+            Color4 backColor = new Color4(.1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
   
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -53,5 +51,9 @@ namespace IntegralEngine
             SwapBuffers();
         }
 
+        public void OnMsg(Msg msg)
+        {
+          
+        }
     }
 }
