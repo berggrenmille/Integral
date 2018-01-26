@@ -9,9 +9,10 @@ namespace IntegralEngine
     class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-             new IE_Window().Run(60);
+            var engine = new IntegralEngine();
+            Console.WriteLine("< End of program >");
         }
     }
 }
