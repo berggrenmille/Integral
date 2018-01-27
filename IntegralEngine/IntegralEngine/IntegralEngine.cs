@@ -11,7 +11,7 @@ namespace IntegralEngine
    
             Window window = new Window();
 
-            MsgBus.Subscribe(window);
+            MessageBus.Subscribe(window);
             
    
             

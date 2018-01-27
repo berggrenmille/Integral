@@ -1,8 +1,8 @@
 ﻿namespace IntegralEngine
 {
-    public class IESystem : IMsgObserver
+    public class IESystem : IMessageObserver
     {
-        public virtual void OnMsg(Msg msg)
+        public virtual void OnMessage(Message message)
         {
             System.Console.WriteLine("base got message");
         }

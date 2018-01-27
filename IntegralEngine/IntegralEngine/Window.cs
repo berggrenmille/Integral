@@ -2,11 +2,12 @@
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Input;
 using Console = System.Console;
 
 namespace IntegralEngine
 {
-    public sealed class Window : GameWindow, IMsgObserver
+    public sealed class Window : GameWindow, IMessageObserver
     {
         public Window()
             : base(1280, // width
@@ -35,15 +36,17 @@ namespace IntegralEngine
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             Input.UpdateInput();
-            MsgBus.SendMessage(new Msg(null,MsgEvent.UPDATE));
+            Time.deltaTime = e.Time;
+            Time.time += e.Time;
+            MessageBus.SendMessage(new Message(null,MessageEvent.UPDATE));
         }
         protected override void OnRenderFrame(FrameEventArgs e)     
         {
-            MsgBus.SendMessage(new Msg(null,MsgEvent.DELAYED_UPDATE));
-            MsgBus.SendMessage(new Msg(null,MsgEvent.RENDER));
+            MessageBus.SendMessage(new Message(null,MessageEvent.DELAYED_UPDATE));
+            MessageBus.SendMessage(new Message(null,MessageEvent.RENDER));
             Title = $"(Vsync: {VSync}) FPS: {1f / e.Time:0}";
-
-            Color4 backColor = new Color4(.1f, .1f, .3f, 1.0f);
+      
+            Color4 backColor = new Color4(1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
   
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -51,9 +54,11 @@ namespace IntegralEngine
             SwapBuffers();
         }
 
-        public void OnMsg(Msg msg)
+        public void OnMessage(Message message)
         {
-          
+            if (message.id == MessageEvent.EXIT) 
+                Exit();
+                
         }
     }
 }

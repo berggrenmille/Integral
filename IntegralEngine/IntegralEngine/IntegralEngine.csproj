@@ -46,10 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="MsgBus.cs" />
-    <Compile Include="IMsgObserver.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Message\MessageBus.cs" />
+    <Compile Include="Message\IMessageObserver.cs" />
     <Compile Include="System.cs" />
+    <Compile Include="Time.cs" />
     <Compile Include="Window.cs" />
     <Compile Include="IntegralEngine.cs" />
     <Compile Include="Program.cs" />
