@@ -47,12 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component.cs" />
-    <Compile Include="GameObject.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageBus.cs" />
     <Compile Include="Message\IMessageObserver.cs" />
-    <Compile Include="System.cs" />
+    <Compile Include="Shader\BasicShader.cs" />
+    <Compile Include="Shader\Shader.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Window.cs" />
     <Compile Include="IntegralEngine.cs" />
@@ -63,6 +64,12 @@
     <None Include="App.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+    <None Include="Shader\basicFragment.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Shader\basicVertex.vert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

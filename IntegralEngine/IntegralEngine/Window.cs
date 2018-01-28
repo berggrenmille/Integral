@@ -31,10 +31,14 @@ namespace IntegralEngine
         protected override void OnLoad(EventArgs e)
         {
             CursorVisible = true;
+            Shader test = new BasicShader();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            if(Input.GetKeyUp(Key.Escape))
+                MessageBus.SendMessage(new Message(null, MessageEvent.EXIT));
+
             Input.UpdateInput();
             Time.deltaTime = e.Time;
             Time.time += e.Time;
@@ -52,6 +56,12 @@ namespace IntegralEngine
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             SwapBuffers();
+        }
+
+        public override void Exit()
+        {
+            MessageBus.SendMessage(new Message("",MessageEvent.CLEANUP,null));
+            base.Exit();
         }
 
         public void OnMessage(Message message)

@@ -14,11 +14,6 @@ namespace IntegralEngine
             lastKeyState = keyState;
             keyState = Keyboard.GetState();
             mouseState = Mouse.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-            {
-                MessageBus.SendMessage(new Message("", MessageEvent.EXIT, null));
-            }
-
         }
 
         public static bool GetKeyHold(Key key)
