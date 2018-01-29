@@ -6,15 +6,10 @@ namespace IntegralEngine
 {
     public class Application : IMessageObserver
     {
-
-        private RawModel model1;
-        private RawModel model2;
-        private Entity ent;
-
         public void Init()
         {
-            ent = new Entity();
-            ent.AddComponent(new Renderer());
+           
+            
         }
         public void Update()
         {

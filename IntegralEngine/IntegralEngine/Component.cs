@@ -23,7 +23,7 @@
 
         public virtual void OnMessage(Message message)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
