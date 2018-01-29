@@ -9,6 +9,7 @@ namespace IntegralEngine
 {
     public sealed class Window : GameWindow, IMessageObserver
     {
+       
         public Window()
             : base(1280, // width
                 720, // height
@@ -21,6 +22,8 @@ namespace IntegralEngine
                 GraphicsContextFlags.ForwardCompatible)
         {
             Console.WriteLine("OpenGL Version: " + GL.GetString(StringName.Version));
+            Application app = new Application();
+            MessageBus.Subscribe(app);
         }
 
         protected override void OnResize(EventArgs e)
@@ -31,7 +34,8 @@ namespace IntegralEngine
         protected override void OnLoad(EventArgs e)
         {
             CursorVisible = true;
-            Shader test = new BasicShader();
+
+            MessageBus.SendMessage(new Message("",MessageEvent.INIT, null));
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -47,15 +51,15 @@ namespace IntegralEngine
         protected override void OnRenderFrame(FrameEventArgs e)     
         {
             MessageBus.SendMessage(new Message(null,MessageEvent.DELAYED_UPDATE));
-            MessageBus.SendMessage(new Message(null,MessageEvent.RENDER));
+            
             Title = $"(Vsync: {VSync}) FPS: {1f / e.Time:0}";
-      
             Color4 backColor = new Color4(1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
-  
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
+       
+            MessageBus.SendMessage(new Message(null, MessageEvent.RENDER));
             SwapBuffers();
+            
         }
 
         public override void Exit()

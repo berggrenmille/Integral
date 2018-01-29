@@ -46,12 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageBus.cs" />
     <Compile Include="Message\IMessageObserver.cs" />
+    <Compile Include="RawModel.cs" />
+    <Compile Include="Renderer.cs" />
     <Compile Include="Shader\BasicShader.cs" />
     <Compile Include="Shader\Shader.cs" />
     <Compile Include="Time.cs" />

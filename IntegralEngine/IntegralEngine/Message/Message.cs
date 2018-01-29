@@ -5,6 +5,7 @@
         UPDATE = 0,
         DELAYED_UPDATE,
         RENDER,
+        INIT,
         CLEANUP,
         EXIT,
         NUM_MSGID

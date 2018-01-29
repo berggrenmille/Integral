@@ -8,8 +8,11 @@ namespace IntegralEngine
        
         public IntegralEngine()
         {
+            
             Window window = new Window();
+            
             MessageBus.Subscribe(window);
+           
             window.Run(0);
         }
     }
