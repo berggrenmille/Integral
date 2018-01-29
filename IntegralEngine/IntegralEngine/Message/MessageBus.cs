@@ -23,9 +23,9 @@ namespace IntegralEngine
         }
         public static void SendMessage(Message message)
         {
-            foreach (var obs in observerList)
+            for(int i = 0; i<observerList.Count; i++)
             {
-                obs.OnMessage(message);
+                observerList[i].OnMessage(message);
             }
         }
     }

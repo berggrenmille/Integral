@@ -1,6 +1,6 @@
 ﻿#version 440 core
 
-out vec4 color;
+out vec4 inColor;
 
 void main(void)
 {

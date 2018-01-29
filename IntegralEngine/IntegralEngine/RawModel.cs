@@ -52,14 +52,14 @@ namespace IntegralEngine
             GL.BindVertexArray(0);
         }
 
-        private static void StoreDataInAttributeList(int attributeNumber, float[] data)
+        private static void StoreDataInAttributeList(int attributeIndex, float[] data)
         {
             int vboID = 0;
             GL.GenBuffers(1,out vboID);
             vbos.Add(vboID);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vboID);
             GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float)*data.Length, data, BufferUsageHint.StaticDraw);
-            GL.VertexAttribPointer(attributeNumber,3,VertexAttribPointerType.Float,false,0,0);
+            GL.VertexAttribPointer(attributeIndex,3,VertexAttribPointerType.Float,false,0,0);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 

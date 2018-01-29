@@ -6,7 +6,7 @@ namespace IntegralEngine
     public class Entity : IMessageObserver
     {
         private readonly List<Component> m_components = new List<Component>();
-        public string m_name = "GameObject";
+        public string m_name = "Entity";
 
         public Entity()
         {
@@ -16,6 +16,9 @@ namespace IntegralEngine
         }
         public void AddComponent(Component comp)
         {
+            comp.host = this;
+            comp.InitializeComponent();
+            MessageBus.Subscribe(comp);
             m_components.Add(comp);
         }
 

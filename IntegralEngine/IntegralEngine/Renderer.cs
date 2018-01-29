@@ -1,13 +1,25 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using System;
+using OpenTK.Graphics.OpenGL4;
 
 namespace IntegralEngine
 {
-    public class Renderer
+    public class Renderer : Component
     {
-        public void Init()
+        private float[] v1 =
         {
-            GL.ClearColor(1,0,0,1);
-        
+            -0.5f, 0.5f, 0,
+            -0.5f, -0.5f, 0,
+            0.5f, -0.5f, 0f,
+            0.5f, -0.5f, 0,
+            0.5f, 0.5f, 0,
+            -0.5f, 0.5f, 0f
+        };
+
+        private RawModel model;
+
+        public override void InitializeComponent()
+        {
+            model = RawModel.LoadToVao(v1);
         }
 
         public void Render(RawModel model)
@@ -17,6 +29,13 @@ namespace IntegralEngine
             GL.DrawArrays(PrimitiveType.Triangles,0,model.GetVertexCount());
             GL.DisableVertexAttribArray(0);
             GL.BindVertexArray(0);
+        }
+
+        public override void OnMessage(Message message)
+        {
+     
+            if (message.id == MessageEvent.RENDER)
+                Render(model);
         }
     }
 }
