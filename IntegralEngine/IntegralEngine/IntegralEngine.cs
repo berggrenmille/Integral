@@ -1,4 +1,5 @@
 ﻿using System;
+using IntegralEngine.Messaging;
 using OpenTK.Input;
 
 namespace IntegralEngine

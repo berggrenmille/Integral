@@ -1,4 +1,6 @@
 ﻿using System;
+using IntegralEngine.Messaging;
+using IntegralEngine.Shading;
 using OpenTK.Graphics.OpenGL4;
 
 namespace IntegralEngine
@@ -9,24 +11,31 @@ namespace IntegralEngine
         {
             -0.5f, 0.5f, 0,
             -0.5f, -0.5f, 0,
-            0.5f, -0.5f, 0f,
             0.5f, -0.5f, 0,
-            0.5f, 0.5f, 0,
-            -0.5f, 0.5f, 0f
+            0.5f, 0.5f, 0
+        };
+
+        private int[] indices =
+        {
+            0, 1, 3,
+            3, 1, 2
         };
 
         private RawModel model;
-
+        private Shader shader;
         public override void InitializeComponent()
         {
-            model = RawModel.LoadToVao(v1);
+            model = RawModel.LoadToVao(v1, indices);
+            shader = new BasicShader();
         }
 
         public void Render(RawModel model)
         {
             GL.BindVertexArray(model.GetVaoID());
             GL.EnableVertexAttribArray(0);
-            GL.DrawArrays(PrimitiveType.Triangles,0,model.GetVertexCount());
+            shader.Enable();
+            GL.DrawElements(PrimitiveType.Triangles, model.GetVertexCount(),DrawElementsType.UnsignedInt,0);
+            shader.Disable();
             GL.DisableVertexAttribArray(0);
             GL.BindVertexArray(0);
         }
@@ -34,7 +43,7 @@ namespace IntegralEngine
         public override void OnMessage(Message message)
         {
      
-            if (message.id == MessageEvent.RENDER)
+            if (message.type == MessageType.RENDER)
                 Render(model);
         }
     }

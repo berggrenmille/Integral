@@ -1,4 +1,4 @@
-﻿namespace IntegralEngine
+﻿namespace IntegralEngine.Messaging
 {
     public interface IMessageObserver
     {

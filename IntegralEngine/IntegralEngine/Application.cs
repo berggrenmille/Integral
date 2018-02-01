@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using IntegralEngine.Messaging;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Input;
 
 namespace IntegralEngine
 {
@@ -8,12 +10,14 @@ namespace IntegralEngine
     {
         public void Init()
         {
-           
-            
+            Entity ent = EntityFactory.CreateEntity();
         }
         public void Update()
         {
-            
+            if(Input.GetKeyDown(Key.A))
+                Console.WriteLine("test 1");
+            if(Input.GetKeyUp(Key.D))
+                Console.WriteLine("test");
         }
 
         public void Cleanup()
@@ -23,12 +27,16 @@ namespace IntegralEngine
 
         public void OnMessage(Message message)
         {
-            if (message.id == MessageEvent.INIT)
+            switch (message.type)
+            {
+                    
+            }
+            if (message.type == MessageType.INIT)
                 Init();
-            if (message.id == MessageEvent.UPDATE)
+            if (message.type == MessageType.UPDATE)
                 Update();
-          //  if (message.id == MessageEvent.CLEANUP)
-             //   Cleanup();
+            if (message.type == MessageType.CLEANUP)
+                Cleanup();
         }
     }
 }

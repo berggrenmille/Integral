@@ -30,12 +30,13 @@ namespace IntegralEngine
             return vertexCount;
         }
 
-        public static RawModel LoadToVao(float[] positions)
+        public static RawModel LoadToVao(float[] positions, int[] indices)
         {
             int vaoID = CreateVAO();
+            BindIndicesBuffer(indices);
             StoreDataInAttributeList(0,positions);
             UnbindVAO();
-            return new RawModel(vaoID, positions.Length/3);
+            return new RawModel(vaoID, indices.Length);
         }
 
         private static int CreateVAO()
@@ -44,6 +45,7 @@ namespace IntegralEngine
             GL.GenVertexArrays(1, out vaoID);
             GL.BindVertexArray(vaoID);
             vaos.Add(vaoID);
+           
             return vaoID;
         }
 
@@ -62,6 +64,16 @@ namespace IntegralEngine
             GL.VertexAttribPointer(attributeIndex,3,VertexAttribPointerType.Float,false,0,0);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
+
+        private static void BindIndicesBuffer(int[] indices)
+        {
+            int vboID = 0;
+            GL.GenBuffers(1, out vboID);
+            vbos.Add(vboID);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, vboID);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, sizeof(int) * indices.Length, indices, BufferUsageHint.StaticDraw);
+        }
+    
 
         public static void Cleanup()
         {

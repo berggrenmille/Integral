@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IntegralEngine
+namespace IntegralEngine.Messaging
 {
 
     public static class MessageBus

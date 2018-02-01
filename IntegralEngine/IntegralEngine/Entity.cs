@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IntegralEngine.Messaging;
 
 namespace IntegralEngine
 {
@@ -16,7 +17,7 @@ namespace IntegralEngine
         }
         public void AddComponent(Component comp)
         {
-            comp.host = this;
+            comp.entity = this;
             comp.InitializeComponent();
             MessageBus.Subscribe(comp);
             m_components.Add(comp);
@@ -26,8 +27,7 @@ namespace IntegralEngine
         {
             for (int i = 0; i < m_components.Count; i++)
             {
-                if(m_components[i].id == comp.id)
-                    m_components.RemoveAt(i);
+               
             }
         }
 
@@ -38,7 +38,7 @@ namespace IntegralEngine
 
         public void OnMessage(Message message)
         {
-            throw new NotImplementedException();
+          
         }
     }
 }

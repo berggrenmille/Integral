@@ -51,13 +51,14 @@
     <Compile Include="Entity.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="Message\Message.cs" />
-    <Compile Include="Message\MessageBus.cs" />
-    <Compile Include="Message\IMessageObserver.cs" />
+    <Compile Include="Messaging\Message.cs" />
+    <Compile Include="Messaging\MessageBus.cs" />
+    <Compile Include="Messaging\IMessageObserver.cs" />
+    <Compile Include="Messaging\MessageType.cs" />
     <Compile Include="RawModel.cs" />
     <Compile Include="Renderer.cs" />
-    <Compile Include="Shader\BasicShader.cs" />
-    <Compile Include="Shader\Shader.cs" />
+    <Compile Include="Shading\BasicShader.cs" />
+    <Compile Include="Shading\Shader.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Window.cs" />
@@ -69,10 +70,10 @@
     <None Include="App.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
-    <None Include="Shader\basicFragment.frag">
+    <None Include="Shading\basicFragment.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Shader\basicVertex.vert">
+    <None Include="Shading\basicVertex.vert">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
