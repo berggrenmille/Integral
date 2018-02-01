@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using IntegralEngine.Messaging;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
-
+    
 namespace IntegralEngine
 {
     public class Application : IMessageObserver
     {
+        
         public void Init()
         {
             Entity ent = EntityFactory.CreateEntity();
+
         }
+
         public void Update()
         {
-            if(Input.GetKeyDown(Key.A))
-                Console.WriteLine("test 1");
-            if(Input.GetKeyUp(Key.D))
-                Console.WriteLine("test");
+            
         }
 
         public void Cleanup()
@@ -29,14 +30,18 @@ namespace IntegralEngine
         {
             switch (message.type)
             {
+                case MessageType.INIT:
+                    Init();
+                    break;
+                case MessageType.UPDATE:
+                    Update();
+                    break;
+                case MessageType.CLEANUP:
+                    Cleanup();
+                    break;
+
                     
             }
-            if (message.type == MessageType.INIT)
-                Init();
-            if (message.type == MessageType.UPDATE)
-                Update();
-            if (message.type == MessageType.CLEANUP)
-                Cleanup();
         }
     }
 }

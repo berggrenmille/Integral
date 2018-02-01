@@ -47,16 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="Component.cs" />
+    <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\LogicScript.cs" />
+    <Compile Include="Components\Mesh.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageBus.cs" />
     <Compile Include="Messaging\IMessageObserver.cs" />
     <Compile Include="Messaging\MessageType.cs" />
-    <Compile Include="RawModel.cs" />
-    <Compile Include="Renderer.cs" />
+    <Compile Include="Components\RawModel.cs" />
+    <Compile Include="Components\Renderer.cs" />
     <Compile Include="Shading\BasicShader.cs" />
     <Compile Include="Shading\Shader.cs" />
     <Compile Include="Time.cs" />
@@ -76,6 +79,9 @@
     <None Include="Shading\basicVertex.vert">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

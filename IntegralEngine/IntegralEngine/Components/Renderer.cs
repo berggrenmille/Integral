@@ -35,7 +35,7 @@ namespace IntegralEngine
             GL.EnableVertexAttribArray(0);
             shader.Enable();
             GL.DrawElements(PrimitiveType.Triangles, model.GetVertexCount(),DrawElementsType.UnsignedInt,0);
-            shader.Disable();
+            
             GL.DisableVertexAttribArray(0);
             GL.BindVertexArray(0);
         }

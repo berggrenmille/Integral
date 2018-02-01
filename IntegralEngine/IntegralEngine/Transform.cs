@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Data;
+using IntegralEngine.Messaging;
 using OpenTK;
 
 namespace IntegralEngine
 {
     public class Transform : Component
     {
-        public Vector3 position;
-        public Quaternion rotation;
-        public Vector3 eulerRotation;
-        public Vector3 scale;
+        public Vector3 position = Vector3.Zero;
+        public Quaternion rotation = Quaternion.Identity;
+        public Vector3 eulerRotation = Vector3.Zero;
+        public Vector3 scale = Vector3.One;
 
         public Vector3 Up()
         {
@@ -24,5 +26,6 @@ namespace IntegralEngine
         {
             return rotation * Vector3.UnitX;
         }
+
     }
 }   

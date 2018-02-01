@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using IntegralEngine.Messaging;
 
 namespace IntegralEngine
@@ -8,13 +9,6 @@ namespace IntegralEngine
     {
         private readonly List<Component> m_components = new List<Component>();
         public string m_name = "Entity";
-
-        public Entity()
-        {
-            //Add Transform
-            //Add Renderer
-           
-        }
         public void AddComponent(Component comp)
         {
             comp.entity = this;
@@ -25,14 +19,32 @@ namespace IntegralEngine
 
         public void RemoveComponent(Component comp)
         {
-            for (int i = 0; i < m_components.Count; i++)
-            {
-               
-            }
+            m_components.Remove(comp);
         }
 
-        public bool HasComponent()
+        public T GetComponent<T>() where T : Component
         {
+            foreach (var comp in m_components)
+            {
+                if (comp.GetType() == typeof(T))
+                {
+                    return (T)Convert.ChangeType(comp, typeof(T));
+                }
+            }
+            return null;
+        }
+
+
+        public bool HasComponentOfType<T>()
+        {
+            foreach (var comp in m_components)
+            {
+                if (comp.GetType() == typeof(T))
+                {
+                    comp.Cleanup();
+                    m_components.Remove(comp);
+                }
+            }
             return false;
         }
 

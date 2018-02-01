@@ -35,41 +35,19 @@ namespace IntegralEngine.Shading
 
         protected void CompileShaders()
         {
-            var vertexShader = GL.CreateShader(ShaderType.VertexShader);
-            GL.ShaderSource(vertexShader, File.ReadAllText(@""+vertexShaderLocation+vertEnd));
-            GL.CompileShader(vertexShader);
-            int vertStatus;
-            GL.GetShader(programID, ShaderParameter.CompileStatus, out vertStatus);
-            if (vertStatus == 0)
-            {
-                Console.WriteLine(
-                GL.GetShaderInfoLog(programID));
-                throw new GraphicsException(
-                    String.Format("Error compiling {0} shader: {1}", "vertex", GL.GetShaderInfoLog(programID)));
-                
-            }
-
-
-            var fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
-            GL.ShaderSource(fragmentShader, File.ReadAllText(@""+fragmentShaderLocation+fragEnd));
-            GL.CompileShader(fragmentShader);
-            int fragStatus;
-            GL.GetShader(programID, ShaderParameter.CompileStatus, out fragStatus);
-            if (fragStatus == 0)
-                throw new GraphicsException(
-                    String.Format("Error compiling {0} shader: {1}", "fragment", GL.GetShaderInfoLog(programID)));
-
-
             programID = GL.CreateProgram();
-            GL.AttachShader(programID,vertexShader);
-            GL.AttachShader(programID, fragmentShader);
+
+            int vertexShader;
+            LoadShader(vertexShaderLocation, ShaderType.VertexShader, programID, out vertexShader);
+
+            int fragmentShader;
+            LoadShader(fragmentShaderLocation, ShaderType.FragmentShader, programID, out fragmentShader);
+
             GL.LinkProgram(programID);
             int status;
-       
             GL.GetProgram(programID, GetProgramParameterName.LinkStatus, out status);
             if (status == 0)
-                throw new GraphicsException(
-                    String.Format("Error linking program: {0}", GL.GetProgramInfoLog(programID)));
+                throw new GraphicsException(String.Format("Error linking program: {0}", GL.GetProgramInfoLog(programID)));
             GL.DetachShader(programID,vertexShader);
             GL.DetachShader(programID, fragmentShader);
             GL.DeleteShader(vertexShader);
@@ -87,6 +65,28 @@ namespace IntegralEngine.Shading
         {
             GL.BindAttribLocation(programID,slot,name);
             Console.WriteLine(programID);
+        }
+        
+        
+        void LoadShader(String filepath, ShaderType type, int program, out int address)
+        {
+            filepath= @"" + filepath;
+            address = GL.CreateShader(type);
+            string end;
+            if (type == ShaderType.VertexShader)
+                end = vertEnd;
+            else
+            {
+                end = fragEnd;
+            }
+
+            using (StreamReader sr = new StreamReader(filepath+end))
+            {
+                GL.ShaderSource(address, sr.ReadToEnd());
+            }
+            GL.CompileShader(address);
+            GL.AttachShader(program, address);
+            Console.WriteLine(GL.GetShaderInfoLog(address));
         }
     }
 }
