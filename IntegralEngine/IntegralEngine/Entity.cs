@@ -8,7 +8,8 @@ namespace IntegralEngine
     public class Entity : IMessageObserver
     {
         private readonly List<Component> m_components = new List<Component>();
-        public string m_name = "Entity";
+        public string name = "Entity";
+        public Transform transform { get; private set; }
         public void AddComponent(Component comp)
         {
             comp.entity = this;

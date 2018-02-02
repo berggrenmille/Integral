@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using IntegralEngine.Messaging;
+using IntegralEngine.TestScripts;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
     
@@ -13,6 +14,7 @@ namespace IntegralEngine
         public void Init()
         {
             Entity ent = EntityFactory.CreateEntity();
+            ent.AddComponent(new Move());
 
         }
 

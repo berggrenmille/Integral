@@ -22,7 +22,7 @@ namespace IntegralEngine
         };
 
         private RawModel model;
-        private Shader shader;
+        public Shader shader;
         public override void InitializeComponent()
         {
             model = RawModel.LoadToVao(v1, indices);
