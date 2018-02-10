@@ -36,7 +36,7 @@ namespace IntegralEngine
 
         private Vector3 RayTrace(Vector3 rayorig,
                                 Vector3 raydir,
-        const std::vector<Sphere> &spheres,
+                                const std::vector<Sphere> &spheres,
         const int &depth)
         {
             
