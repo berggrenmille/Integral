@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using IntegralEngine.Messaging;
 
 namespace IntegralEngine
 {
     public class Entity : IMessageObserver
     {
-        private readonly List<Component> m_components = new List<Component>();
         public string name = "Entity";
         public Transform transform { get; private set; }
+
+        private readonly List<Component> m_components = new List<Component>();
+
         public void AddComponent(Component comp)
         {
             comp.entity = this;
@@ -20,7 +21,9 @@ namespace IntegralEngine
 
         public void RemoveComponent(Component comp)
         {
-            m_components.Remove(comp);
+            int index = m_components.IndexOf(comp);
+            m_components[index].Cleanup();
+            m_components.RemoveAt(index);
         }
 
         public T GetComponent<T>() where T : Component
@@ -42,13 +45,17 @@ namespace IntegralEngine
             {
                 if (comp.GetType() == typeof(T))
                 {
-                    comp.Cleanup();
-                    m_components.Remove(comp);
+                    return true;
                 }
             }
             return false;
         }
 
+        public void Cleanup()
+        {
+            for(int i = 0; i<m_components.Count; i++)
+                RemoveComponent(m_components[0]);
+        }
         public void OnMessage(Message message)
         {
           

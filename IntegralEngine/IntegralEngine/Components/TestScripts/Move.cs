@@ -8,7 +8,7 @@ namespace IntegralEngine.TestScripts
     public class Move : LogicScript
     {
         private Transform transform;
-        private Renderer renderer;
+        private MeshRenderer renderer;
         private int shaderHandel;
        
         protected override void Update()
@@ -32,7 +32,7 @@ namespace IntegralEngine.TestScripts
 
        
             transform = entity.GetComponent<Transform>();
-            renderer = entity.GetComponent<Renderer>();
+            renderer = entity.GetComponent<MeshRenderer>();
             shaderHandel = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inPosition");
         }
 

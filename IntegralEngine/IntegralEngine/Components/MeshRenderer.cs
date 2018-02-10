@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace IntegralEngine
 {
-    public class Renderer : Component
+    public class MeshRenderer : Component
     {
         private float[] v1 =
         {
