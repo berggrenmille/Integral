@@ -2,11 +2,11 @@
 {
     public class Game
     {
-        public bool isLoaded;
+        public bool isLoaded = false;
 
         public virtual void Load()
         {
-            
+            isLoaded = true;
         }
 
         public virtual void Update()

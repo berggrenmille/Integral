@@ -53,7 +53,8 @@
     <Compile Include="Components\TestScripts\Move.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityFactory.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\TestGame\TestScene.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageBus.cs" />

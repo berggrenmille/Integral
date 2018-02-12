@@ -54,7 +54,7 @@ namespace IntegralEngine
         {
             MessageBus.SendMessage(new Message(MessageType.DELAYED_UPDATE));
 
-            Title = $"(Vsync: {VSync = VSyncMode.On}) FPS: {1f / e.Time:0}";
+            Title = $"(Vsync: {VSync = VSyncMode.Off}) FPS: {1f / e.Time:0}";
             Color4 backColor = new Color4(1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);

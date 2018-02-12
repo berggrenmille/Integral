@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿
 using IntegralEngine.Messaging;
-using IntegralEngine.TestScripts;
-using OpenTK.Graphics.OpenGL4;
-using OpenTK.Input;
-    
+using IntegralEngine.TestGame;
+
+
 namespace IntegralEngine
 {
     public class Application : IMessageObserver
     {
-        
+        private Game game;
         public void Init()
         {
-            Entity ent = EntityFactory.CreateEntity();
-            ent.AddComponent(new Move());
-
+            game = new TestScene();
+            game.Load();
+            game.Init();
         }
 
         public void Update()
         {
-            
+            if (game.isLoaded)
+                game.Update();
         }
 
         public void Cleanup()

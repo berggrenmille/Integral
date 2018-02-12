@@ -9,8 +9,9 @@ namespace IntegralEngine.TestScripts
     {
         private Transform transform;
         private MeshRenderer renderer;
-        private int shaderHandel;
-       
+        private int shaderPosHandle;
+        private int shaderScaleHandle;
+
         protected override void Update()
         {
             if (Input.GetKeyHold(Key.D))
@@ -22,18 +23,22 @@ namespace IntegralEngine.TestScripts
             if (Input.GetKeyHold(Key.S))
                 transform.position.Y -= 1 * (float)Time.deltaTime;
 
-            Console.WriteLine(entity.GetComponent<Transform>().position.X);
-            renderer.shader.LoadVector3(shaderHandel, transform.position);
+            if (Input.GetKeyDown(Key.Up))
+                transform.scale *= 1.1f;
+            if (Input.GetKeyDown(Key.Down))
+                transform.scale *= 0.9f;
+
+            renderer.shader.LoadVector3(shaderScaleHandle, transform.scale);
+            renderer.shader.LoadVector3(shaderPosHandle, transform.position);
             
         }
 
         public override void InitializeComponent()
         {
-
-       
             transform = entity.GetComponent<Transform>();
             renderer = entity.GetComponent<MeshRenderer>();
-            shaderHandel = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inPosition");
+            shaderPosHandle = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inPosition");
+            shaderScaleHandle = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inScale");
         }
 
 
