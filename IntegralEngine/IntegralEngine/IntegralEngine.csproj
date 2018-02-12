@@ -50,7 +50,6 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\LogicScript.cs" />
     <Compile Include="Components\Mesh.cs" />
-    <Compile Include="Components\SphereRayTracer.cs" />
     <Compile Include="Components\TestScripts\Move.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityFactory.cs" />
