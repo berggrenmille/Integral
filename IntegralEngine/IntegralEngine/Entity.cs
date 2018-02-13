@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using IntegralEngine.Messaging;
 
 namespace IntegralEngine
@@ -13,6 +15,8 @@ namespace IntegralEngine
 
         public void AddComponent(Component comp)
         {
+            if (HasComponent(comp))
+                return;
             comp.entity = this;
             comp.InitializeComponent();
             MessageBus.Subscribe(comp);
@@ -26,29 +30,28 @@ namespace IntegralEngine
             m_components.RemoveAt(index);
         }
 
+        /// <summary>
+        /// GetComponent tries to return a component. Returns null if nothing was found.
+        /// </summary>
+        /// <typeparam name="T">Type of component</typeparam>
+        /// <returns></returns>
         public T GetComponent<T>() where T : Component
         {
-            foreach (var comp in m_components)
-            {
-                if (comp.GetType() == typeof(T))
-                {
-                    return (T)Convert.ChangeType(comp, typeof(T));
-                }
-            }
-            return null;
+            return (from comp in m_components where comp.GetType() == typeof(T) select (T) Convert.ChangeType(comp, typeof(T))).FirstOrDefault();
         }
 
-
+        /// <summary>
+        /// HasComponentOfType return a bool indicating if an entity has a specific component attached;
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public bool HasComponentOfType<T>()
         {
-            foreach (var comp in m_components)
-            {
-                if (comp.GetType() == typeof(T))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return m_components.Any(comp => comp.GetType() == typeof(T));
+        }
+        public bool HasComponent(Component comp)
+        {
+            return m_components.Any(listComp => listComp.GetType() == comp.GetType());
         }
 
         public void Cleanup()

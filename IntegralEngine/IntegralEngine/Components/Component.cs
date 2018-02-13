@@ -13,8 +13,12 @@ namespace IntegralEngine
             
         }
 
+        public virtual void UpdateComponent()
+        {
+            
+        }
   
-        public virtual void Cleanup()
+        public virtual void CleanupComponent()
         {
 
         }

@@ -21,20 +21,26 @@ namespace IntegralEngine
             3, 1, 2
         };
 
-        private RawModel model;
+        private Mesh mesh;
         public Shader shader;
         public override void InitializeComponent()
         {
-            model = RawModel.LoadToVao(v1, indices);
+            mesh = entity.GetComponent<Mesh>();
             shader = new BasicShader();
         }
 
-        public void Render(RawModel model)
+        public void Render()
         {
-            GL.BindVertexArray(model.GetVaoID());
+            if (mesh == null)
+            {
+                Console.WriteLine("No mesh attached when trying to render entity: "+entity.name);
+                mesh = entity.GetComponent<Mesh>();
+                return;
+            }
+            GL.BindVertexArray(mesh.model.GetVaoID());
             GL.EnableVertexAttribArray(0);
             shader.Enable();
-            GL.DrawElements(PrimitiveType.Triangles, model.GetVertexCount(),DrawElementsType.UnsignedInt,0);
+            GL.DrawElements(PrimitiveType.Triangles, mesh.model.GetVertexCount(),DrawElementsType.UnsignedInt,0);
             
             GL.DisableVertexAttribArray(0);
             GL.BindVertexArray(0);
@@ -44,7 +50,7 @@ namespace IntegralEngine
         {
      
             if (message.type == MessageType.RENDER)
-                Render(model);
+                Render();
         }
     }
 }
