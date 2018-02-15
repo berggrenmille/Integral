@@ -45,7 +45,6 @@ namespace IntegralEngine
             GL.GenVertexArrays(1, out vaoID);
             GL.BindVertexArray(vaoID);
             vaos.Add(vaoID);
-           
             return vaoID;
         }
 

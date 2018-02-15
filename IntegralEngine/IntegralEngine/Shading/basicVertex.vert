@@ -14,5 +14,5 @@ void main()
 {
 	vec3 vertPos = vec3((vPosition+inPosition)*inScale);
 	gl_Position = vec4(vertPos,1.0);
-	vColor = vec3(cos(vertPos.x*5), sin(vertPos.y*5), sin(vertPos.x*5));
+	vColor = vec3(vertPos.x, vertPos.y, vertPos.x);
 }

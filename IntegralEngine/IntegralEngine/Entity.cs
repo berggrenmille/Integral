@@ -26,7 +26,7 @@ namespace IntegralEngine
         public void RemoveComponent(Component comp)
         {
             int index = m_components.IndexOf(comp);
-            m_components[index].Cleanup();
+            m_components[index].CleanupComponent();
             m_components.RemoveAt(index);
         }
 
