@@ -7,21 +7,7 @@ namespace IntegralEngine
 {
     public class MeshRenderer : Component
     {
-        private float[] v1 =
-        {
-            -0.5f, 0.5f, 0,
-            -0.5f, -0.5f, 0,
-            0.5f, -0.5f, 0,
-            0.5f, 0.5f, 0
-        };
-
-        private int[] indices =
-        {
-            0, 1, 3,
-            3, 1, 2
-        };
-
-        private Mesh mesh;
+        public Mesh mesh;
         public Shader shader;
         public override void InitializeComponent()
         {

@@ -4,7 +4,7 @@ namespace IntegralEngine.Shading
 {
     public class BasicShader : Shader
     {
-        public BasicShader() : base("Shading/basicVertex","Shading/basicFragment")
+        public BasicShader() : base("Src/Shading/basicVertex", "Src/Shading/basicFragment")
         {
            
         }

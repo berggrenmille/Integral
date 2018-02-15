@@ -46,46 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="Components\Component.cs" />
-    <Compile Include="Components\LogicScript.cs" />
-    <Compile Include="Loader\Loader.cs" />
-    <Compile Include="Models\Mesh.cs" />
-    <Compile Include="Components\TestScripts\Move.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="EntityFactory.cs" />
-    <Compile Include="Game\Game.cs" />
-    <Compile Include="Game\TestGame\TestScene.cs" />
-    <Compile Include="Input.cs" />
-    <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\MessageBus.cs" />
-    <Compile Include="Messaging\IMessageObserver.cs" />
-    <Compile Include="Messaging\MessageType.cs" />
-    <Compile Include="Models\RawModel.cs" />
-    <Compile Include="Components\MeshRenderer.cs" />
-    <Compile Include="Models\ModelTexture.cs" />
-    <Compile Include="Shading\BasicShader.cs" />
-    <Compile Include="Shading\Shader.cs" />
-    <Compile Include="Time.cs" />
-    <Compile Include="Transform.cs" />
-    <Compile Include="Window.cs" />
-    <Compile Include="IntegralEngine.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Src\Application.cs" />
+    <Compile Include="Src\Components\Component.cs" />
+    <Compile Include="Src\Components\LogicScript.cs" />
+    <Compile Include="Src\Loader\Loader.cs" />
+    <Compile Include="Src\Models\Mesh.cs" />
+    <Compile Include="Src\Components\TestScripts\Move.cs" />
+    <Compile Include="Src\Entity.cs" />
+    <Compile Include="Src\EntityFactory.cs" />
+    <Compile Include="Src\Game\Game.cs" />
+    <Compile Include="Src\Game\TestGame\TestScene.cs" />
+    <Compile Include="Src\Input.cs" />
+    <Compile Include="Src\Messaging\Message.cs" />
+    <Compile Include="Src\Messaging\MessageBus.cs" />
+    <Compile Include="Src\Messaging\IMessageObserver.cs" />
+    <Compile Include="Src\Messaging\MessageType.cs" />
+    <Compile Include="Src\Models\RawModel.cs" />
+    <Compile Include="Src\Components\MeshRenderer.cs" />
+    <Compile Include="Src\Models\ModelTexture.cs" />
+    <Compile Include="Src\Shading\BasicShader.cs" />
+    <Compile Include="Src\Shading\Shader.cs" />
+    <Compile Include="Src\Time.cs" />
+    <Compile Include="Src\Transform.cs" />
+    <Compile Include="Src\Window.cs" />
+    <Compile Include="Src\IntegralEngine.cs" />
+    <Compile Include="Src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="OpenTK.dll.config" />
-    <None Include="packages.config" />
-    <None Include="Shading\basicFragment.frag">
+    <None Include="Src\OpenTK.dll.config" />
+    <None Include="Src\packages.config" />
+    <None Include="Src\Shading\basicFragment.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Shading\basicVertex.vert">
+    <None Include="Src\Shading\basicVertex.vert">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <Folder Include="Res\" />
+    <Folder Include="Src\Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
