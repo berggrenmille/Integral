@@ -1,6 +1,5 @@
 ﻿using System;
-using IntegralEngine.Messaging;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK;
 using OpenTK.Input;
 
 namespace IntegralEngine.TestScripts
@@ -9,8 +8,6 @@ namespace IntegralEngine.TestScripts
     {
         private Transform transform;
         private MeshRenderer renderer;
-        private int shaderPosHandle;
-        private int shaderScaleHandle;
 
         protected override void Update()
         {
@@ -22,25 +19,27 @@ namespace IntegralEngine.TestScripts
                 transform.position.Y += 1 * (float)Time.deltaTime;
             if (Input.GetKeyHold(Key.S))
                 transform.position.Y -= 1 * (float)Time.deltaTime;
+            if (Input.GetKeyHold(Key.Up))
+                transform.position.Z += 1 * (float)Time.deltaTime;
+            if (Input.GetKeyHold(Key.Down))
+                transform.position.Z -= 1 * (float)Time.deltaTime;
 
-            if (Input.GetKeyDown(Key.Up))
+            if (Input.GetKeyDown(Key.Right))
                 transform.scale *= 1.1f;
-            if (Input.GetKeyDown(Key.Down))
+            if (Input.GetKeyDown(Key.Left))
                 transform.scale *= 0.9f;
 
-            renderer.shader.LoadVector3(shaderScaleHandle, transform.scale);
-            renderer.shader.LoadVector3(shaderPosHandle, transform.position);
-            
+            if (Input.GetKeyHold(Key.E))
+                transform.eulerRotation.Y += (float)(10 * Time.deltaTime);
+            if (Input.GetKeyHold(Key.Q))
+                transform.eulerRotation.Y -= (float)(10 * Time.deltaTime);
+            Console.WriteLine(transform.position);
         }
 
         public override void InitializeComponent()
         {
             transform = entity.GetComponent<Transform>();
             renderer = entity.GetComponent<MeshRenderer>();
-            shaderPosHandle = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inPosition");
-            shaderScaleHandle = GL.GetUniformLocation(renderer.shader.GetProgramID(), "inScale");
         }
-
-
     }
 }

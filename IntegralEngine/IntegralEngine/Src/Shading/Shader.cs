@@ -13,15 +13,24 @@ namespace IntegralEngine.Shading
         protected string fragmentShaderLocation;
 
         protected int programID;
-        
+
+        protected int locTranformMatrix;
+        protected int locProjectionMatrix;
+
         protected Shader(string vertex, string fragment)
         {
             vertexShaderLocation = vertex;
            
             fragmentShaderLocation = fragment;
-
+            
             CompileShaders();
-            BindAttributes();
+
+            if(Camera.GetCurrentCamera()!= null)
+                LoadProjectionMatrix(Camera.GetCurrentCamera().GetProjectionMatrix());
+            else
+            {
+                Console.WriteLine("No active camera, could not load projection matrix");
+            }
         }
 
         public void Enable()
@@ -42,18 +51,19 @@ namespace IntegralEngine.Shading
 
             int fragmentShader;
             LoadShader(fragmentShaderLocation, ShaderType.FragmentShader, programID, out fragmentShader);
-
+            BindAttributes();
+     
             GL.LinkProgram(programID);
             int status;
             GL.GetProgram(programID, GetProgramParameterName.LinkStatus, out status);
             if (status == 0)
                 throw new GraphicsException(String.Format("Error linking program: {0}", GL.GetProgramInfoLog(programID)));
+            GetUniformLocations();
             GL.DetachShader(programID,vertexShader);
             GL.DetachShader(programID, fragmentShader);
             GL.DeleteShader(vertexShader);
-            GL.DeleteShader(fragmentShader);
-          
-            Enable();
+            GL.DeleteShader(fragmentShader); 
+            
         }
 
         protected virtual void BindAttributes()
@@ -64,20 +74,30 @@ namespace IntegralEngine.Shading
         protected void BindAttribute(int slot, string name)
         {
             GL.BindAttribLocation(programID,slot,name);
-            Console.WriteLine(programID);
         }
 
-        void LoadInt(int location, int value)
+        protected int GetUniformLocation(string name)
+        {
+            return GL.GetUniformLocation(programID, name);
+        }
+        protected virtual void GetUniformLocations()
+        {
+            locTranformMatrix = GetUniformLocation("inTranformationMatrix");
+            locProjectionMatrix = GetUniformLocation("inProjectionMatrix");
+            
+        }
+
+        public void LoadInt(int location, int value)
         {
             GL.Uniform1(location, value);
         }
 
-        void LoadFloat(int location, float value)
+        public void LoadFloat(int location, float value)
         {
             GL.Uniform1(location, value);
         }
 
-        void LoadVector2(int location, Vector2 vect)
+        public void LoadVector2(int location, Vector2 vect)
         {
             GL.Uniform2(location, vect);
         }
@@ -87,18 +107,28 @@ namespace IntegralEngine.Shading
             GL.Uniform3(location, vect);
         }
 
-        void LoadVector4(int location, Vector4 vect)
+        public void LoadVector4(int location, Vector4 vect)
         {
             GL.Uniform4(location, vect);
         }
 
-        void LoadMatrix4(int location,ref Matrix4 matrix)
+        public void LoadMatrix4(int location, Matrix4 matrix)
         {
             GL.UniformMatrix4(location, false, ref matrix);
         }
+
+        public void LoadTranformMatrix(Matrix4 mat)
+        {
+            LoadMatrix4(locTranformMatrix, mat);
+        }
+
+        public void LoadProjectionMatrix(Matrix4 mat)
+        {
+            LoadMatrix4(locProjectionMatrix, mat);
+        }
         
         
-        void LoadShader(String filepath, ShaderType type, int program, out int address)
+        private void LoadShader(String filepath, ShaderType type, int program, out int address)
         {
             filepath= @"" + filepath;
             address = GL.CreateShader(type);

@@ -10,7 +10,8 @@ namespace IntegralEngine
 {
     public sealed class Window : GameWindow, IMessageObserver
     {
-
+        public static int width = 1280;
+        public static int height = 720;
         public Window()
             : base(1280, // width
                 720, // height
@@ -30,6 +31,8 @@ namespace IntegralEngine
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
+            width = Width;
+            height = Height;
         }
 
         protected override void OnLoad(EventArgs e)

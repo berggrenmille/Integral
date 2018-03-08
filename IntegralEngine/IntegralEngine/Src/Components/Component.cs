@@ -7,7 +7,7 @@ namespace IntegralEngine
     {
 
         public Entity entity;
-
+        public bool enabled = true;
         public virtual void InitializeComponent()
         {
             
@@ -20,7 +20,7 @@ namespace IntegralEngine
   
         public virtual void CleanupComponent()
         {
-
+            enabled = false;
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using OpenTK.Graphics.OpenGL;
 using BufferTarget = OpenTK.Graphics.OpenGL4.BufferTarget;
 using BufferUsageHint = OpenTK.Graphics.OpenGL4.BufferUsageHint;
 using GL = OpenTK.Graphics.OpenGL4.GL;
@@ -7,14 +6,14 @@ using VertexAttribPointerType = OpenTK.Graphics.OpenGL4.VertexAttribPointerType;
 
 namespace IntegralEngine
 {
-    public class RawModel
+    public class RawMesh
     {
         private static List<int> vaos = new List<int>();
         private static List<int> vbos = new List<int>();
 
         private int vaoID;
         private int vertexCount;
-        public RawModel(int _vaoID, int _vertexCount)
+        public RawMesh(int _vaoID, int _vertexCount)
         {
             vaoID = _vaoID;
             vertexCount = _vertexCount;
@@ -30,13 +29,14 @@ namespace IntegralEngine
             return vertexCount;
         }
 
-        public static RawModel LoadToVao(float[] positions, int[] indices)
+        public static RawMesh LoadToVao(float[] positions, float[] textureCoordinates, int[] indices)
         {
             int vaoID = CreateVAO();
             BindIndicesBuffer(indices);
-            StoreDataInAttributeList(0,positions);
+            StoreDataInAttributeList(0,3,positions);
+            StoreDataInAttributeList(1, 2, textureCoordinates);
             UnbindVAO();
-            return new RawModel(vaoID, indices.Length);
+            return new RawMesh(vaoID, indices.Length);
         }
 
         private static int CreateVAO()
@@ -53,14 +53,14 @@ namespace IntegralEngine
             GL.BindVertexArray(0);
         }
 
-        private static void StoreDataInAttributeList(int attributeIndex, float[] data)
+        private static void StoreDataInAttributeList(int attributeIndex, int size, float[] data)
         {
             int vboID = 0;
             GL.GenBuffers(1,out vboID);
             vbos.Add(vboID);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vboID);
             GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float)*data.Length, data, BufferUsageHint.StaticDraw);
-            GL.VertexAttribPointer(attributeIndex,3,VertexAttribPointerType.Float,false,0,0);
+            GL.VertexAttribPointer(attributeIndex,size,VertexAttribPointerType.Float,false,0,0);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 

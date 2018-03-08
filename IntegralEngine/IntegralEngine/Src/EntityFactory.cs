@@ -9,7 +9,7 @@ namespace IntegralEngine
         {
             Entity ent = new Entity();
             ent.AddComponent(new Transform());
-            ent.AddComponent(new MeshRenderer());
+            ent.Initialize();
             entityList.Add(ent);
             return ent;
         }

@@ -13,6 +13,12 @@ namespace IntegralEngine
 
         private readonly List<Component> m_components = new List<Component>();
 
+        public void Initialize() //Setup public references
+        {
+            this.transform = this.GetComponent<Transform>();
+
+        }
+
         public void AddComponent(Component comp)
         {
             if (HasComponent(comp))

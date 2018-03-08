@@ -23,8 +23,9 @@ namespace IntegralEngine
 
         public void Cleanup()
         {
-            RawModel.Cleanup();
+            RawMesh.Cleanup();
             MeshTexture.Cleanup();
+           
         }
 
         public void OnMessage(Message message)

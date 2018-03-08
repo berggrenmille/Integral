@@ -4,15 +4,20 @@ namespace IntegralEngine.Shading
 {
     public class BasicShader : Shader
     {
-        public BasicShader() : base("Src/Shading/basicVertex", "Src/Shading/basicFragment")
+        public BasicShader() : base("Res/Shaders/basicVertex", "Res/Shaders/basicFragment")
         {
            
         }
 
         protected override void BindAttributes()
         {  
-            BindAttribute(0,"position");
-             
+            BindAttribute(0,"vPosition");
+            BindAttribute(1, "vTextCoords");
+        }
+
+        protected override void GetUniformLocations()
+        {
+            base.GetUniformLocations();
         }
     }
 }
