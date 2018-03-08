@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Src\Application.cs" />
-    <Compile Include="Src\Components\Camera.cs" />
+    <Compile Include="Src\Components\Camera\Camera.cs" />
+    <Compile Include="Src\Components\Camera\ICameraObserver.cs" />
     <Compile Include="Src\Components\Component.cs" />
     <Compile Include="Src\Components\LogicScript.cs" />
     <Compile Include="Src\Loader\Loader.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Src\Shading\BasicShader.cs" />
     <Compile Include="Src\Shading\Shader.cs" />
     <Compile Include="Src\Time.cs" />
-    <Compile Include="Src\Transform.cs" />
+    <Compile Include="Src\Components\Transform.cs" />
     <Compile Include="Src\Window.cs" />
     <Compile Include="Src\IntegralEngine.cs" />
     <Compile Include="Src\Program.cs" />

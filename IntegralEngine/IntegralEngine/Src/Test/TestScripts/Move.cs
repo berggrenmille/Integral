@@ -7,7 +7,6 @@ namespace IntegralEngine.TestScripts
     public class Move : LogicScript
     {
         private Transform transform;
-        private MeshRenderer renderer;
 
         protected override void Update()
         {
@@ -33,13 +32,11 @@ namespace IntegralEngine.TestScripts
                 transform.eulerRotation.Y += (float)(10 * Time.deltaTime);
             if (Input.GetKeyHold(Key.Q))
                 transform.eulerRotation.Y -= (float)(10 * Time.deltaTime);
-            Console.WriteLine(transform.position);
         }
 
         public override void InitializeComponent()
         {
             transform = entity.GetComponent<Transform>();
-            renderer = entity.GetComponent<MeshRenderer>();
         }
     }
 }

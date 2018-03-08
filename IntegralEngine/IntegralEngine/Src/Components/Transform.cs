@@ -12,7 +12,7 @@ namespace IntegralEngine
         public Vector3 eulerRotation = Vector3.Zero;
         public Vector3 scale = Vector3.One;
 
-        private Matrix4 transformMatrix = new Matrix4();
+        private Matrix4 transformMatrix;
 
         public Vector3 Up()
         {
@@ -43,7 +43,7 @@ namespace IntegralEngine
             Matrix4.CreateScale(ref scale, out scaleMatrix);
 
             transformMatrix = Matrix4.Identity;
-            transformMatrix *= translationMatrix * rotationMatrix * scaleMatrix;
+            transformMatrix *= scaleMatrix * rotationMatrix * translationMatrix;
             return transformMatrix;
         }
 

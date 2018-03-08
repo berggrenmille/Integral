@@ -9,6 +9,7 @@
         EARLY_INIT,
         CLEANUP,
         EXIT,
+        CAMERA,
         NUM_MSGTYPES
     }
 }

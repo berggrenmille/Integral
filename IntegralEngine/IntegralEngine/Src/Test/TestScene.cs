@@ -1,4 +1,5 @@
 ﻿using System;
+using IntegralEngine.Components;
 using IntegralEngine.TestScripts;
 
 namespace IntegralEngine.TestGame

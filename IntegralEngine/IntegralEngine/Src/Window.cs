@@ -12,6 +12,7 @@ namespace IntegralEngine
     {
         public static int width = 1280;
         public static int height = 720;
+        public static bool isExiting = false;
         public Window()
             : base(1280, // width
                 720, // height
@@ -33,6 +34,7 @@ namespace IntegralEngine
             GL.Viewport(0, 0, Width, Height);
             width = Width;
             height = Height;
+            Camera.Change();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -45,30 +47,34 @@ namespace IntegralEngine
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             if (Input.GetKeyUp(Key.Escape))
-                MessageBus.SendMessage(new Message(MessageType.EXIT));
-
+            {
+                Exit();
+            }
             Input.UpdateInput();
             Time.deltaTime = e.Time;
             Time.time += e.Time;
             MessageBus.SendMessage(new Message(MessageType.UPDATE));
+            
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
+            if(isExiting)
+                return;
             MessageBus.SendMessage(new Message(MessageType.DELAYED_UPDATE));
 
             Title = $"(Vsync: {VSync = VSyncMode.Off}) FPS: {1f / e.Time:0}";
             Color4 backColor = new Color4(1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            MessageBus.SendMessage(new Message(MessageType.RENDER));
+            Camera.Render();
             SwapBuffers();
 
         }
 
         public override void Exit()
         {
+            isExiting = true;
             MessageBus.SendMessage(new Message(MessageType.CLEANUP));
             base.Exit();
         }

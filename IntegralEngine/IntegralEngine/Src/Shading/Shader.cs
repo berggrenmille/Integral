@@ -16,6 +16,7 @@ namespace IntegralEngine.Shading
 
         protected int locTranformMatrix;
         protected int locProjectionMatrix;
+        protected int locViewMatrix;
 
         protected Shader(string vertex, string fragment)
         {
@@ -84,7 +85,7 @@ namespace IntegralEngine.Shading
         {
             locTranformMatrix = GetUniformLocation("inTranformationMatrix");
             locProjectionMatrix = GetUniformLocation("inProjectionMatrix");
-            
+            locViewMatrix = GetUniformLocation("inViewMatrix");
         }
 
         public void LoadInt(int location, int value)
@@ -126,8 +127,11 @@ namespace IntegralEngine.Shading
         {
             LoadMatrix4(locProjectionMatrix, mat);
         }
-        
-        
+        public void LoadViewMatrix(Matrix4 mat)
+        {
+            LoadMatrix4(locViewMatrix, mat);
+        }
+
         private void LoadShader(String filepath, ShaderType type, int program, out int address)
         {
             filepath= @"" + filepath;

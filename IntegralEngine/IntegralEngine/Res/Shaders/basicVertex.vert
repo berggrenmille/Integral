@@ -10,9 +10,10 @@ out vec2 passTextCoords;
 //Uniform variables
 uniform mat4 inTranformationMatrix;
 uniform mat4 inProjectionMatrix;
+uniform mat4 inViewMatrix;
 
 void main(void)
 {
-	gl_Position = inTranformationMatrix * inProjectionMatrix * vec4(vPosition, 1.0);
+	gl_Position = inProjectionMatrix * inViewMatrix * inTranformationMatrix * vec4(vPosition, 1.0);
 	passTextCoords = vTextCoords;
 }
