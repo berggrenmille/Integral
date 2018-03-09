@@ -20,12 +20,12 @@ namespace IntegralEngine.Components
 
             texturedMesh = entity.GetComponent<TexturedMesh>();
             shader = new BasicShader();
-            UpdateProjectionMatrix();
+            UpdateProjectionMatrix(Camera.GetCurrentCamera());
         }
 
-        private void UpdateProjectionMatrix()
+        private void UpdateProjectionMatrix(Camera cam)
         {
-            if (Camera.GetCurrentCamera() != null)
+            if (cam != null)
             {
                 projectionMatrix = Camera.GetCurrentCamera().GetProjectionMatrix();
             }
@@ -37,7 +37,7 @@ namespace IntegralEngine.Components
         }
 
 
-        public void OnCameraRender()
+        public void OnCameraRender(Camera cam)
         {
             shader.Disable();
             if (texturedMesh == null)
@@ -58,11 +58,11 @@ namespace IntegralEngine.Components
             shader.LoadTranformMatrix(entity.transform.GetTransformMatrix());
             if (projectionMatrix == Matrix4.Identity)
             {
-                UpdateProjectionMatrix();
+                UpdateProjectionMatrix(cam);
                 return;
             }
             shader.LoadProjectionMatrix(projectionMatrix);
-            shader.LoadViewMatrix(Camera.GetCurrentCamera().GetViewMatrix());
+            shader.LoadViewMatrix(cam.GetViewMatrix());
 
             GL.DrawElements(PrimitiveType.Triangles, texturedMesh.GetRawMesh().GetVertexCount(), DrawElementsType.UnsignedInt, 0);
 
@@ -71,9 +71,9 @@ namespace IntegralEngine.Components
             GL.BindVertexArray(0);
         }
 
-        public void OnCameraChange()
+        public void OnCameraChange(Camera cam)
         {
-             UpdateProjectionMatrix();
+             UpdateProjectionMatrix(cam);
         }
     }
 }

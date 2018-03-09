@@ -8,9 +8,9 @@ namespace IntegralEngine
     public class Camera : Component
     {
         private static Camera current;
-        public delegate void m_OnRender();
+        public delegate void m_OnRender(Camera cam);
 
-        public delegate void m_OnChange();
+        public delegate void m_OnChange(Camera cam);
 
         public static m_OnRender OnRender;
         public static m_OnChange OnChange;
@@ -23,12 +23,14 @@ namespace IntegralEngine
         public void Render()
         {
             MessageBus.SendMessage(new Message(MessageType.RENDER));
-            OnRender.Invoke();
+            if(OnRender.GetInvocationList().Length != 0)
+                OnRender.Invoke(this);
         }
 
         public void Change()
         {
-            OnChange.Invoke();
+            if(OnChange.GetInvocationList().Length != 0)
+                OnChange.Invoke(this);
         }
 
         public static Camera GetCurrentCamera()
