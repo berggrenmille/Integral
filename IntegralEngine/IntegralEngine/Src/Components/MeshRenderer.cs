@@ -6,16 +6,18 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace IntegralEngine.Components
 {
-    class MeshRenderer : Component, ICameraObserver
+    class MeshRenderer : Component
     {
         public TexturedMesh texturedMesh; //The mesh to be used
         public Shader shader; //The shader to be used
 
         private Matrix4 projectionMatrix = Matrix4.Identity; //Store projection matrix for optimization
-
+        
         public override void InitializeComponent()
         {
-            Camera.Subscribe(this);
+            Camera.OnRender += OnCameraRender;
+            Camera.OnChange += OnCameraChange;
+
             texturedMesh = entity.GetComponent<TexturedMesh>();
             shader = new BasicShader();
             UpdateProjectionMatrix();

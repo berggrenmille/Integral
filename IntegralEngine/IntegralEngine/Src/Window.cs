@@ -34,7 +34,7 @@ namespace IntegralEngine
             GL.Viewport(0, 0, Width, Height);
             width = Width;
             height = Height;
-            Camera.Change();
+            Camera.GetCurrentCamera().Change();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -67,7 +67,8 @@ namespace IntegralEngine
             Color4 backColor = new Color4(1f, .1f, .3f, 1.0f);
             GL.ClearColor(backColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Camera.Render();
+            if (Camera.GetCurrentCamera() != null)
+                Camera.GetCurrentCamera().Render();
             SwapBuffers();
 
         }

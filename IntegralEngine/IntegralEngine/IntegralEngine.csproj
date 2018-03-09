@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="Src\Application.cs" />
     <Compile Include="Src\Components\Camera\Camera.cs" />
-    <Compile Include="Src\Components\Camera\ICameraObserver.cs" />
     <Compile Include="Src\Components\Component.cs" />
     <Compile Include="Src\Components\LogicScript.cs" />
     <Compile Include="Src\Loader\Loader.cs" />
     <Compile Include="Src\Components\TexturedMesh.cs" />
+    <Compile Include="Src\Loader\OBJLoader.cs" />
     <Compile Include="Src\Test\TestScripts\Move.cs" />
     <Compile Include="Src\Entity.cs" />
     <Compile Include="Src\EntityFactory.cs" />

@@ -8,40 +8,27 @@ namespace IntegralEngine
     public class Camera : Component
     {
         private static Camera current;
+        public delegate void m_OnRender();
+
+        public delegate void m_OnChange();
+
+        public static m_OnRender OnRender;
+        public static m_OnChange OnChange;
+
 
         public const float FOV = 80;
         public const float NEAR_PLANE = 0.1f;
         public const float FAR_PLANE = 1000.0f;
 
-        private static readonly List<ICameraObserver> observerList = new List<ICameraObserver>();
-        public static void Subscribe(ICameraObserver obs)
+        public void Render()
         {
-            observerList.Add(obs);
+            MessageBus.SendMessage(new Message(MessageType.RENDER));
+            OnRender.Invoke();
         }
 
-        public static void Unsubscribe(ICameraObserver obs)
+        public void Change()
         {
-            observerList.Remove(obs);
-        }
-
-        public static void Render()
-        {
-            if(current == null)
-                return;
-            for (int i = 0; i < observerList.Count; i++)
-            {
-                observerList[i].OnCameraRender();
-            }
-        }
-
-        public static void Change()
-        {
-            if (current == null)
-                return;
-            for (int i = 0; i < observerList.Count; i++)
-            {
-                observerList[i].OnCameraChange();
-            }
+            OnChange.Invoke();
         }
 
         public static Camera GetCurrentCamera()

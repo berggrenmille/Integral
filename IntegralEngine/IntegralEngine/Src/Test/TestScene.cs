@@ -1,6 +1,7 @@
 ﻿using System;
 using IntegralEngine.Components;
 using IntegralEngine.TestScripts;
+using OpenTK;
 
 namespace IntegralEngine.TestGame
 {
@@ -38,8 +39,6 @@ namespace IntegralEngine.TestGame
             ent.AddComponent(new MeshRenderer());
             MeshTexture texture = MeshTexture.LoadTexture("Res/Images/bobross.png");
             ent.GetComponent<MeshRenderer>().texturedMesh = new TexturedMesh(RawMesh.LoadToVao(v1,textureCoords, indices), texture);
-
-            
             base.Load();
         }
         
