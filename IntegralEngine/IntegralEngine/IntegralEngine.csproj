@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
     <None Include="Res\Shaders\basicFragment.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
