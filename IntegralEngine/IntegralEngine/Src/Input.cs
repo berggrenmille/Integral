@@ -21,7 +21,7 @@ namespace IntegralEngine
             return keyState.IsKeyDown(key);
         }
 
-        public static bool GetKeyDown(Key key)
+         public static bool GetKeyDown(Key key)
         {
             if (keyState.IsKeyDown(key) && !lastKeyState.IsKeyDown(key))
             {
